@@ -1,0 +1,148 @@
+[gd_scene load_steps=14 format=3 uid="uid://ckuatidwmd40d"]
+
+[ext_resource type="Shader" uid="uid://browa58w0pxv0" path="res://assets/shaders/VHS_FILTER.gdshader" id="2_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://be8pigyy5bm7b" path="res://Scenes/player.tscn" id="3_5a7ea"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f3sb7"]
+albedo_color = Color(0, 0.54902, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fj7yv"]
+metallic = 1.0
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_tlwt5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqk2v"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_036b0"]
+albedo_color = Color(0, 0.0156863, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwbse"]
+albedo_color = Color(1, 0.588235, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlwt5"]
+albedo_color = Color(0.933333, 0.709804, 0.737255, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fj7yv"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_tlwt5"]
+sky_material = SubResource("ProceduralSkyMaterial_fj7yv")
+
+[sub_resource type="Environment" id="Environment_aqk2v"]
+background_mode = 2
+sky = SubResource("Sky_tlwt5")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tlwt5"]
+shader = ExtResource("2_fj7yv")
+shader_parameter/overlay = false
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.25
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 3.0
+shader_parameter/roll_size = 15.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.03
+shader_parameter/noise_opacity = 0.2
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.03
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 1.0
+
+[node name="World" type="Node3D"]
+
+[node name="BOXES" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="BOXES"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29842, -0.00768531, -3.91857)
+material_override = SubResource("StandardMaterial3D_f3sb7")
+use_collision = true
+size = Vector3(102, 0.001, 83)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="BOXES"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.780815, 3.35327, 36.5183)
+material_override = SubResource("StandardMaterial3D_fj7yv")
+use_collision = true
+size = Vector3(101, 7, 2)
+material = SubResource("ORMMaterial3D_tlwt5")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="BOXES"]
+transform = Transform3D(-2.98023e-08, 0, -1, 0, 1, 0, 1, 0, -2.98023e-08, 49.7813, 3.35327, -3.99302)
+material_override = SubResource("StandardMaterial3D_fj7yv")
+use_collision = true
+size = Vector3(83.1309, 7, 2)
+material = SubResource("ORMMaterial3D_tlwt5")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="BOXES"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.150947, 3.35327, -44.317)
+material_override = SubResource("StandardMaterial3D_fj7yv")
+use_collision = true
+size = Vector3(100, 7, 2)
+material = SubResource("ORMMaterial3D_tlwt5")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="BOXES"]
+transform = Transform3D(-2.98023e-08, 0, -1, 0, 1, 0, 1, 0, -2.98023e-08, -50.146, 3.35327, -3.55848)
+material_override = SubResource("StandardMaterial3D_fj7yv")
+use_collision = true
+size = Vector3(82, 7, 2)
+material = SubResource("ORMMaterial3D_tlwt5")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="BOXES"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.61694, 0.778469, -10.4082)
+material_override = SubResource("StandardMaterial3D_aqk2v")
+use_collision = true
+size = Vector3(4.23389, 1.54843, 4.15771)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="BOXES"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.00525, 0.899685, -5.54244)
+material_override = SubResource("StandardMaterial3D_036b0")
+use_collision = true
+size = Vector3(5, 2.79938, 4.31348)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="BOXES"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.542061, 7.21216, -26.739)
+material_override = SubResource("StandardMaterial3D_dwbse")
+use_collision = true
+size = Vector3(99.8965, 0.808944, 33.2096)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="BOXES"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25749, 0.301647, -9.37719)
+material_override = SubResource("StandardMaterial3D_tlwt5")
+use_collision = true
+size = Vector3(5, 0.691774, 12)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_aqk2v")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VHS_filter_Rect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_tlwt5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Player" parent="." instance=ExtResource("3_5a7ea")]

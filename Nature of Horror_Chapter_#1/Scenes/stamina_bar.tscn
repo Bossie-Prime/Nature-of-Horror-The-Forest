@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3dvtksapk7tm"]
+
+[ext_resource type="Script" uid="uid://badnwvsd0fvj7" path="res://stamina_bar.gd" id="1_dk0pf"]
+[ext_resource type="Texture2D" uid="uid://dkpw3xgjfrd4n" path="res://assets/Stamina/OutOfStam.png" id="2_qbfsp"]
+[ext_resource type="Texture2D" uid="uid://bdkn0ybwpb2j1" path="res://assets/Stamina/FullStam.png" id="3_6dmtv"]
+
+[node name="Stamina_Bar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_dk0pf")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 543.0
+offset_right = 961.0
+offset_bottom = 580.0
+value = 25.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_qbfsp")
+texture_progress = ExtResource("3_6dmtv")
