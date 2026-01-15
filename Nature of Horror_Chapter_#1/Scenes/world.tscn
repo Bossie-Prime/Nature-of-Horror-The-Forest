@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://ckuatidwmd40d"]
+[gd_scene load_steps=15 format=3 uid="uid://ckuatidwmd40d"]
 
 [ext_resource type="Shader" uid="uid://browa58w0pxv0" path="res://assets/shaders/VHS_FILTER.gdshader" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://be8pigyy5bm7b" path="res://Scenes/player.tscn" id="3_5a7ea"]
+[ext_resource type="PackedScene" uid="uid://bxeutkwe2rfuu" path="res://Nature of Horror assets/Ground.gltf" id="3_8j60k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f3sb7"]
 albedo_color = Color(0, 0.54902, 0, 1)
@@ -24,8 +25,10 @@ albedo_color = Color(1, 0.588235, 0, 1)
 albedo_color = Color(0.933333, 0.709804, 0.737255, 1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fj7yv"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.095733, 0.0639899, 0, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Sky" id="Sky_tlwt5"]
 sky_material = SubResource("ProceduralSkyMaterial_fj7yv")
@@ -33,26 +36,32 @@ sky_material = SubResource("ProceduralSkyMaterial_fj7yv")
 [sub_resource type="Environment" id="Environment_aqk2v"]
 background_mode = 2
 sky = SubResource("Sky_tlwt5")
-tonemap_mode = 2
+tonemap_mode = 3
+sdfgi_enabled = true
 glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.466181, 0.466181, 0.466181, 1)
+volumetric_fog_emission = Color(0.146232, 0.0230466, 0, 1)
+volumetric_fog_emission_energy = 0.1
+volumetric_fog_length = 128.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tlwt5"]
 shader = ExtResource("2_fj7yv")
-shader_parameter/overlay = false
+shader_parameter/overlay = true
 shader_parameter/scanlines_opacity = 0.4
 shader_parameter/scanlines_width = 0.25
 shader_parameter/grille_opacity = 0.3
 shader_parameter/resolution = Vector2(640, 480)
-shader_parameter/pixelate = true
+shader_parameter/pixelate = false
 shader_parameter/roll = true
 shader_parameter/roll_speed = 3.0
-shader_parameter/roll_size = 15.0
-shader_parameter/roll_variation = 1.8
+shader_parameter/roll_size = 20.0
+shader_parameter/roll_variation = 1.5
 shader_parameter/distort_intensity = 0.03
-shader_parameter/noise_opacity = 0.2
+shader_parameter/noise_opacity = 0.103
 shader_parameter/noise_speed = 5.0
 shader_parameter/static_noise_intensity = 0.06
-shader_parameter/aberration = 0.03
+shader_parameter/aberration = 0.00500005
 shader_parameter/brightness = 1.4
 shader_parameter/discolor = true
 shader_parameter/warp_amount = 0.0
@@ -75,7 +84,7 @@ use_collision = true
 size = Vector3(102, 0.001, 83)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="BOXES"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.780815, 3.35327, 36.5183)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9618, 3.35327, 36.5183)
 material_override = SubResource("StandardMaterial3D_fj7yv")
 use_collision = true
 size = Vector3(101, 7, 2)
@@ -126,8 +135,36 @@ material_override = SubResource("StandardMaterial3D_tlwt5")
 use_collision = true
 size = Vector3(5, 0.691774, 12)
 
+[node name="blockbench_export" parent="BOXES" instance=ExtResource("3_8j60k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.3222, 0, 66.8814)
+
+[node name="blockbench_export2" parent="BOXES" instance=ExtResource("3_8j60k")]
+transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, -18.6347, 0, 66.8814)
+
+[node name="blockbench_export3" parent="BOXES" instance=ExtResource("3_8j60k")]
+transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, 37.7513, 0, 66.8814)
+
+[node name="blockbench_export4" parent="BOXES" instance=ExtResource("3_8j60k")]
+transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, 34.5401, 0, 128.537)
+
+[node name="blockbench_export5" parent="BOXES" instance=ExtResource("3_8j60k")]
+transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, 36.1208, 0, 188.783)
+
+[node name="blockbench_export6" parent="BOXES" instance=ExtResource("3_8j60k")]
+transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, -20.4343, 0, 184.249)
+
+[node name="blockbench_export7" parent="BOXES" instance=ExtResource("3_8j60k")]
+transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, -77.8085, 0, 188.783)
+
+[node name="blockbench_export8" parent="BOXES" instance=ExtResource("3_8j60k")]
+transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, -78.7193, 0, 127.48)
+
+[node name="blockbench_export9" parent="BOXES" instance=ExtResource("3_8j60k")]
+transform = Transform3D(-0.0053581, 0, -0.999986, 0, 1, 0, 0.999986, 0, -0.0053581, -22.5482, 0, 124.078)
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+visible = false
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

@@ -22,6 +22,7 @@ var gravity = 9.8
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
+@onready var flashlight = $Head/Camera3D/Spotlight/SpotLight3D
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -31,6 +32,13 @@ func _unhandled_input(event):
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
+
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_F:
+			if flashlight.light_energy > 0.0:
+				flashlight.light_energy = 0.0
+			else:
+				flashlight.light_energy = 3.0
 
 func _physics_process(delta):
 	# Gravity
