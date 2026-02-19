@@ -6,7 +6,9 @@ const WALK_SPEED = 2.5
 const SPRINT_SPEED = 5.5
 
 const JUMP_VELOCITY = 4.5
-const SENSITIVITY = 0.003
+const BASE_SENSITIVITY = 0.003
+const ZOOM_SENS_MULTIPLIER = 0.7   # 30% slower mouse movement while zoomed
+var current_sensitivity = BASE_SENSITIVITY
 
 # Head bob variables
 const BOB_FREQ = 4.0
@@ -16,6 +18,10 @@ var t_bob = 0.0
 # FOV variables
 const BASE_FOV = 75.0
 const FOV_CHANGE = 1.5
+
+# Zoom variables
+const ZOOM_FOV = 20.0
+const ZOOM_SPEED = 7.0   # 30% slower zoom in/out
 
 # Gravity
 var gravity = 9.8
@@ -29,18 +35,29 @@ func _ready():
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
-		head.rotate_y(-event.relative.x * SENSITIVITY)
-		camera.rotate_x(-event.relative.y * SENSITIVITY)
+		head.rotate_y(-event.relative.x * current_sensitivity)
+		camera.rotate_x(-event.relative.y * current_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
 
-	if event is InputEventKey and event.pressed and not event.echo:
-		if event.keycode == KEY_F:
-			if flashlight.light_energy > 0.0:
-				flashlight.light_energy = 0.0
-			else:
-				flashlight.light_energy = 3.0
+	# Flashlight toggle using Input Map
+	if Input.is_action_just_pressed("Flash Light"):
+		if flashlight.light_energy > 0.0:
+			flashlight.light_energy = 0.0
+		else:
+			flashlight.light_energy = 3.0
+
 
 func _physics_process(delta):
+
+	# Zoom input (customizable)
+	var is_zooming = Input.is_action_pressed("Zoom")
+
+	# Adjust sensitivity when zoomed
+	if is_zooming:
+		current_sensitivity = BASE_SENSITIVITY * ZOOM_SENS_MULTIPLIER
+	else:
+		current_sensitivity = BASE_SENSITIVITY
+
 	# Gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -76,10 +93,16 @@ func _physics_process(delta):
 	t_bob += delta * velocity.length() * float(is_on_floor())
 	camera.transform.origin = _headbob(t_bob)
 
-	# FOV effect
+	# Sprint FOV effect
 	var velocity_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED * 2)
-	var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
-	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
+	var sprint_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
+
+	# Zoomify style zoom
+	var target_fov = sprint_fov
+	if is_zooming:
+		target_fov = ZOOM_FOV
+
+	camera.fov = lerp(camera.fov, target_fov, delta * ZOOM_SPEED)
 
 	move_and_slide()
 
