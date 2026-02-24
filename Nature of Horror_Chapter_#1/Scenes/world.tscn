@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://ckuatidwmd40d"]
+[gd_scene load_steps=12 format=3 uid="uid://ckuatidwmd40d"]
 
+[ext_resource type="Script" uid="uid://cwicx63or274m" path="res://Scenes/world.gd" id="1_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://bwxu1mfsm1n16" path="res://Nature of Horror assets/Tree.gltf" id="2_8j60k"]
 [ext_resource type="Shader" uid="uid://browa58w0pxv0" path="res://assets/shaders/VHS_FILTER.gdshader" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://be8pigyy5bm7b" path="res://Scenes/player.tscn" id="3_5a7ea"]
 [ext_resource type="PackedScene" uid="uid://bxeutkwe2rfuu" path="res://Nature of Horror assets/Ground.gltf" id="3_8j60k"]
+[ext_resource type="PackedScene" uid="uid://bq4idecqli16o" path="res://Scenes/watcher.tscn" id="5_fo5ed"]
+[ext_resource type="ArrayOccluder3D" uid="uid://chq7uv2ejxngp" path="res://Scenes/world.occ" id="7_o06y3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fj7yv"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -46,261 +49,976 @@ shader_parameter/anti_bleed_intensity = 1.8
 shader_parameter/color_bleed_blur_strength = 1.0
 shader_parameter/color_bleed_quality = 5
 
-[node name="World" type="Node3D"]
+[node name="World" type="Node3D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_5ukr8")
+watcher_scene = ExtResource("5_fo5ed")
+player = NodePath("Player")
+min_spawn_distance = 30.0
+spawn_band_width = 50.0
 
 [node name="BOXES" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="blockbench_export" parent="BOXES" instance=ExtResource("3_8j60k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.3222, 0, 66.8814)
-
-[node name="blockbench_export2" parent="BOXES" instance=ExtResource("3_8j60k")]
-transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, -18.6347, 0, 66.8814)
-
-[node name="blockbench_export3" parent="BOXES" instance=ExtResource("3_8j60k")]
+[node name="Floor" parent="BOXES" instance=ExtResource("3_8j60k")]
 transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, 37.7513, 0, 66.8814)
 
-[node name="blockbench_export4" parent="BOXES" instance=ExtResource("3_8j60k")]
+[node name="Floor" parent="BOXES/Floor" index="0"]
+lod_bias = 0.001
+
+[node name="Leaf_Pile" parent="BOXES/Floor" index="1"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="Fallen_leaves" parent="BOXES/Floor" index="2"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="AllInOne" parent="BOXES/Floor" index="3"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="Floor2" parent="BOXES" instance=ExtResource("3_8j60k")]
 transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, 34.5401, 0, 128.537)
 
-[node name="blockbench_export5" parent="BOXES" instance=ExtResource("3_8j60k")]
+[node name="Floor" parent="BOXES/Floor2" index="0"]
+lod_bias = 0.001
+
+[node name="Leaf_Pile" parent="BOXES/Floor2" index="1"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="Fallen_leaves" parent="BOXES/Floor2" index="2"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="AllInOne" parent="BOXES/Floor2" index="3"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="Floor3" parent="BOXES" instance=ExtResource("3_8j60k")]
 transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, 36.1208, 0, 188.783)
 
-[node name="blockbench_export6" parent="BOXES" instance=ExtResource("3_8j60k")]
+[node name="Floor" parent="BOXES/Floor3" index="0"]
+lod_bias = 0.001
+
+[node name="Leaf_Pile" parent="BOXES/Floor3" index="1"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="Fallen_leaves" parent="BOXES/Floor3" index="2"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="AllInOne" parent="BOXES/Floor3" index="3"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="Floor4" parent="BOXES" instance=ExtResource("3_8j60k")]
 transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, -20.4343, 0, 184.249)
 
-[node name="blockbench_export7" parent="BOXES" instance=ExtResource("3_8j60k")]
+[node name="Floor" parent="BOXES/Floor4" index="0"]
+lod_bias = 0.001
+
+[node name="Leaf_Pile" parent="BOXES/Floor4" index="1"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="Fallen_leaves" parent="BOXES/Floor4" index="2"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="AllInOne" parent="BOXES/Floor4" index="3"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="Floor5" parent="BOXES" instance=ExtResource("3_8j60k")]
 transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, -77.8085, 0, 188.783)
 
-[node name="blockbench_export8" parent="BOXES" instance=ExtResource("3_8j60k")]
+[node name="Floor" parent="BOXES/Floor5" index="0"]
+lod_bias = 0.001
+
+[node name="Leaf_Pile" parent="BOXES/Floor5" index="1"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="Fallen_leaves" parent="BOXES/Floor5" index="2"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="AllInOne" parent="BOXES/Floor5" index="3"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="Floor6" parent="BOXES" instance=ExtResource("3_8j60k")]
 transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, -78.7193, 0, 127.48)
 
-[node name="blockbench_export9" parent="BOXES" instance=ExtResource("3_8j60k")]
+[node name="Floor" parent="BOXES/Floor6" index="0"]
+lod_bias = 0.001
+
+[node name="Leaf_Pile" parent="BOXES/Floor6" index="1"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="Fallen_leaves" parent="BOXES/Floor6" index="2"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="AllInOne" parent="BOXES/Floor6" index="3"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="Floor7" parent="BOXES" instance=ExtResource("3_8j60k")]
 transform = Transform3D(-0.0053581, 0, -0.999986, 0, 1, 0, 0.999986, 0, -0.0053581, -22.5482, 0, 124.078)
+
+[node name="Floor" parent="BOXES/Floor7" index="0"]
+lod_bias = 0.001
+
+[node name="Leaf_Pile" parent="BOXES/Floor7" index="1"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="Fallen_leaves" parent="BOXES/Floor7" index="2"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="AllInOne" parent="BOXES/Floor7" index="3"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="Floor8" parent="BOXES" instance=ExtResource("3_8j60k")]
+transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, -18.6347, 0, 66.8814)
+
+[node name="Floor" parent="BOXES/Floor8" index="0"]
+lod_bias = 0.001
+
+[node name="Leaf_Pile" parent="BOXES/Floor8" index="1"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="Fallen_leaves" parent="BOXES/Floor8" index="2"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="AllInOne" parent="BOXES/Floor8" index="3"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="Floor9" parent="BOXES" instance=ExtResource("3_8j60k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.3222, 0, 66.8814)
+
+[node name="Floor" parent="BOXES/Floor9" index="0"]
+lod_bias = 0.001
+
+[node name="Leaf_Pile" parent="BOXES/Floor9" index="1"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="Fallen_leaves" parent="BOXES/Floor9" index="2"]
+lod_bias = 0.001
+visibility_range_end = 90.0
+
+[node name="AllInOne" parent="BOXES/Floor9" index="3"]
+lod_bias = 0.001
+visibility_range_end = 90.0
 
 [node name="Tree0" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.822938, 0, -0.568131, 0, 1, 0, 0.568131, 0, 0.822938, 0, 1.13267, 91.3934)
 
+[node name="Below_Tree" parent="BOXES/Tree0" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/Tree0/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export11" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.822938, 0, -0.568131, 0, 1, 0, 0.568131, 0, 0.822938, 14.604, 1.13267, 91.3934)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export11" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export11/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export12" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.84803, 1.13267, 102.525)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export12" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export12/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export13" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.884858, 0, -0.465862, 0, 1, 0, 0.465862, 0, 0.884858, -6.65774, 1.13267, 102.525)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export13" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export13/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export14" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.611375, 0, -0.791341, 0, 1, 0, 0.791341, 0, 0.611375, -54.0706, 1.13267, 96.5234)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export14" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export14/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export15" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.99952, 0, 0.030992, 0, 1, 0, -0.030992, 0, 0.99952, -40.0668, 1.13267, 104.325)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export15" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export15/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export16" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.303617, 0, 0.952794, 0, 1, 0, -0.952794, 0, 0.303617, -27.8635, 1.13267, 91.1219)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export16" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export16/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export17" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.401884, 0, -0.915691, 0, 1, 0, 0.915691, 0, -0.401884, -15.8602, 1.13267, 91.1219)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export17" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export17/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export36" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.210745, 0, -0.977541, 0, 1, 0, 0.977541, 0, 0.210745, -28.6115, 1.13267, 76.7136)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export36" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export36/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export37" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.325898, 0, -0.945405, 0, 1, 0, 0.945405, 0, 0.325898, -51.7292, 1.13267, 70.2679)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export37" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export37/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export38" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.91989, 0, -0.392177, 0, 1, 0, 0.392177, 0, -0.91989, -50.628, 1.13267, 55.6561)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export38" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export38/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export39" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.210745, 0, -0.977541, 0, 1, 0, 0.977541, 0, 0.210745, -28.6115, 1.13267, 76.7136)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export39" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export39/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export40" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.325898, 0, -0.945405, 0, 1, 0, 0.945405, 0, 0.325898, -51.7292, 1.13267, 70.2679)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export40" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export40/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export41" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.91989, 0, -0.392177, 0, 1, 0, 0.392177, 0, -0.91989, -50.628, 1.13267, 55.6561)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export41" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export41/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export18" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.349439, 0, -0.936959, 0, 1, 0, 0.936959, 0, -0.349439, 16.8294, 1.13267, 168.751)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export18" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export18/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export19" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.349439, 0, -0.936959, 0, 1, 0, 0.936959, 0, -0.349439, 20.4037, 1.13267, 182.911)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export19" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export19/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export20" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.244749, 0, -0.969586, 0, 1, 0, 0.969586, 0, 0.244749, 7.22283, 1.13267, 176.176)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export20" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export20/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export21" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.61764, 0, -0.786461, 0, 1, 0, 0.786461, 0, -0.61764, -1.37833, 1.13267, 117.58)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export21" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export21/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export22" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.274681, 0, -0.961535, 0, 1, 0, 0.961535, 0, 0.274681, -5.51575, 1.13267, 133.068)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export22" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export22/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export23" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.998126, 0, -0.061188, 0, 1, 0, 0.061188, 0, 0.998126, 10.273, 1.13267, 141.668)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export23" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export23/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export24" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.986202, 0, 0.165547, 0, 1, 0, -0.165547, 0, -0.986202, 13.2108, 1.13267, 153.307)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export24" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export24/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export25" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.650138, 0, 0.759816, 0, 1, 0, -0.759816, 0, 0.650138, -95.7815, 1.13267, 59.1941)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export25" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export25/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export26" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.650138, 0, 0.759816, 0, 1, 0, -0.759816, 0, 0.650138, -94.2722, 1.13267, 44.6684)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export26" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export26/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export27" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.103348, 0, 0.994645, 0, 1, 0, -0.994645, 0, 0.103348, -82.3772, 1.13267, 55.5225)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export27" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export27/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export28" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.850288, 0, 0.526318, 0, 1, 0, -0.526318, 0, 0.850288, -96.2671, 1.13267, 113.505)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export28" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export28/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export29" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.850288, 0, 0.526318, 0, 1, 0, -0.526318, 0, 0.850288, -96.2671, 1.13267, 127.422)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export29" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export29/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export30" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.850288, 0, 0.526318, 0, 1, 0, -0.526318, 0, 0.850288, -70.2644, 1.13267, 109.999)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export30" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export30/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export31" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.850288, 0, 0.526318, 0, 1, 0, -0.526318, 0, 0.850288, -70.2644, 1.13267, 130.508)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export31" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export31/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export32" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.0316027, 0, 0.999501, 0, 1, 0, -0.999501, 0, -0.0316027, -70.2644, 1.13267, 155.412)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export32" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export32/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export74" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.0316027, 0, 0.999501, 0, 1, 0, -0.999501, 0, -0.0316027, -93.3372, 1.13267, 155.412)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export74" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export74/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export33" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.850288, 0, 0.526318, 0, 1, 0, -0.526318, 0, 0.850288, -70.2644, 1.13267, 193.134)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export33" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export33/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export34" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.999872, 0, -0.0160214, 0, 1, 0, 0.0160214, 0, 0.999872, -43.5293, 1.13267, 194.599)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export34" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export34/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export35" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.850288, 0, 0.526318, 0, 1, 0, -0.526318, 0, 0.850288, -18.6253, 1.13267, 187.641)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export35" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export35/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export42" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.850288, 0, 0.526318, 0, 1, 0, -0.526318, 0, 0.850288, 27.154, 1.13267, 197.529)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export42" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export42/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export43" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.0724725, 0, 0.99737, 0, 1, 0, -0.99737, 0, 0.0724725, -87.0595, 1.13267, 100.383)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export43" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export43/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export44" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.916314, 0, 0.400461, 0, 1, 0, -0.400461, 0, -0.916314, -98.9311, 1.13267, 86.8804)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export44" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export44/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export45" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.869253, 0, -0.494367, 0, 1, 0, 0.494367, 0, 0.869253, -89.9997, 1.13267, 74.9414)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export45" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export45/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export46" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.600783, 0, 0.799412, 0, 1, 0, -0.799412, 0, -0.600783, -76.8835, 1.13267, 85.803)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export46" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export46/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export47" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.513616, 0, -0.85802, 0, 1, 0, 0.85802, 0, 0.513616, -69.9304, 1.13267, 76.0187)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export47" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export47/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export48" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.600783, 0, 0.799412, 0, 1, 0, -0.799412, 0, -0.600783, -76.8835, 1.13267, 85.803)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export48" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export48/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export49" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.611375, 0, -0.791341, 0, 1, 0, 0.791341, 0, 0.611375, 17.3451, 1.13267, 76.0142)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export49" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export49/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export50" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.325898, 0, -0.945405, 0, 1, 0, 0.945405, 0, 0.325898, 19.6865, 1.13267, 49.7587)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export50" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export50/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export51" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.513616, 0, -0.85802, 0, 1, 0, 0.85802, 0, 0.513616, 1.48539, 1.13267, 55.5096)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export51" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export51/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export52" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.600783, 0, 0.799412, 0, 1, 0, -0.799412, 0, -0.600783, -22.3145, 1.13267, 52.8419)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export52" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export52/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export53" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.611375, 0, -0.791341, 0, 1, 0, 0.791341, 0, 0.611375, 44.0802, 1.13267, 133.513)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export53" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export53/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export54" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.325898, 0, -0.945405, 0, 1, 0, 0.945405, 0, 0.325898, 46.4216, 1.13267, 107.258)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export54" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export54/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export55" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.513616, 0, -0.85802, 0, 1, 0, 0.85802, 0, 0.513616, 28.2205, 1.13267, 113.008)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export55" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export55/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export56" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.600783, 0, 0.799412, 0, 1, 0, -0.799412, 0, -0.600783, 21.2674, 1.13267, 122.793)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export56" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export56/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export57" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.611375, 0, -0.791341, 0, 1, 0, 0.791341, 0, 0.611375, 55.0672, 1.13267, 80.7753)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export57" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export57/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export58" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.325898, 0, -0.945405, 0, 1, 0, 0.945405, 0, 0.325898, 57.4087, 1.13267, 54.5198)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export58" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export58/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export59" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.513616, 0, -0.85802, 0, 1, 0, 0.85802, 0, 0.513616, 39.2075, 1.13267, 60.2706)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export59" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export59/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export60" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.600783, 0, 0.799412, 0, 1, 0, -0.799412, 0, -0.600783, 32.2544, 1.13267, 70.0549)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export60" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export60/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export61" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.611375, 0, -0.791341, 0, 1, 0, 0.791341, 0, 0.611375, 55.7997, 1.13267, 174.531)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export61" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export61/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export62" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.325898, 0, -0.945405, 0, 1, 0, 0.945405, 0, 0.325898, 58.1412, 1.13267, 148.276)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export62" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export62/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export63" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.513616, 0, -0.85802, 0, 1, 0, 0.85802, 0, 0.513616, 39.94, 1.13267, 154.027)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export63" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export63/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export64" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.600783, 0, 0.799412, 0, 1, 0, -0.799412, 0, -0.600783, 32.9869, 1.13267, 163.811)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export64" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export64/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export65" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.611375, 0, -0.791341, 0, 1, 0, 0.791341, 0, 0.611375, -30.9979, 1.13267, 154.022)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export65" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export65/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export66" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.325898, 0, -0.945405, 0, 1, 0, 0.945405, 0, 0.325898, -28.6564, 1.13267, 127.767)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export66" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export66/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export67" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.513616, 0, -0.85802, 0, 1, 0, 0.85802, 0, 0.513616, -46.8576, 1.13267, 133.518)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export67" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export67/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export68" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.600783, 0, 0.799412, 0, 1, 0, -0.799412, 0, -0.600783, -53.8107, 1.13267, 143.302)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export68" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export68/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export69" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.611375, 0, -0.791341, 0, 1, 0, 0.791341, 0, 0.611375, -81.9045, 1.13267, 203.83)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export69" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export69/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export70" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.325898, 0, -0.945405, 0, 1, 0, 0.945405, 0, 0.325898, -79.563, 1.13267, 177.575)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export70" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export70/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export71" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.513616, 0, -0.85802, 0, 1, 0, 0.85802, 0, 0.513616, -97.7642, 1.13267, 183.325)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export71" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export71/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export72" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.600783, 0, 0.799412, 0, 1, 0, -0.799412, 0, -0.600783, -104.717, 1.13267, 193.11)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export72" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export72/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export73" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.611375, 0, -0.791341, 0, 1, 0, 0.791341, 0, 0.611375, -2.79784, 1.13267, 199.435)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export73" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export73/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export75" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.325898, 0, -0.945405, 0, 1, 0, 0.945405, 0, 0.325898, -7.0486, 1.13267, 164.756)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export75" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export75/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export76" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.513616, 0, -0.85802, 0, 1, 0, 0.85802, 0, 0.513616, -25.2497, 1.13267, 170.507)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export76" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export76/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export77" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.600783, 0, 0.799412, 0, 1, 0, -0.799412, 0, -0.600783, -50.5146, 1.13267, 173.699)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export77" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export77/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export78" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.611375, 0, -0.791341, 0, 1, 0, 0.791341, 0, 0.611375, -27.3355, 1.13267, 206.028)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export78" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export78/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export79" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.325898, 0, -0.945405, 0, 1, 0, 0.945405, 0, 0.325898, -7.0486, 1.13267, 164.756)
+
+[node name="Below_Tree" parent="BOXES/blockbench_export79" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export79/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
 
 [node name="blockbench_export80" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(-0.600783, 0, 0.799412, 0, 1, 0, -0.799412, 0, -0.600783, -32.2029, 1.13267, 180.292)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export80" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export80/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="blockbench_export81" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.513616, 0, -0.85802, 0, 1, 0, 0.85802, 0, 0.513616, -69.9304, 1.13267, 76.0187)
 
+[node name="Below_Tree" parent="BOXES/blockbench_export81" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
+[node name="Tree" parent="BOXES/blockbench_export81/Weird Branches" index="0"]
+lod_bias = 0.001
+visibility_range_end = 100.0
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 83.1441, 0)
-visible = false
-shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aqk2v")
@@ -318,4 +1036,262 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." instance=ExtResource("3_5a7ea")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.6421, 1.73844, 138.185)
+transform = Transform3D(0.999925, 0.0121297, 0.00151838, -0.0121297, 0.999926, -1.84189e-05, -0.00151849, 0, 0.999999, -26.6421, 1.73844, 138.185)
+
+[node name="SpawnPoints" type="Node3D" parent="."]
+
+[node name="SpawnPoint_1" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 63)
+
+[node name="SpawnPoint_2" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -98, 0, 48)
+
+[node name="SpawnPoint_3" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -84, 0, 53)
+
+[node name="SpawnPoint_4" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.3509, 0, 53)
+
+[node name="SpawnPoint_5" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.7018, 0, 47.1927)
+
+[node name="SpawnPoint_6" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.762787, 0, 50.6771)
+
+[node name="SpawnPoint_7" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0148, 0, 50.6771)
+
+[node name="SpawnPoint_8" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.9852, 0, 56.0972)
+
+[node name="SpawnPoint_9" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.3427, 0, 56.0972)
+
+[node name="SpawnPoint_10" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.1812, 0, 77.3904)
+
+[node name="SpawnPoint_11" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.4037, 0, 73.5189)
+
+[node name="SpawnPoint_12" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1747, 0, 73.5189)
+
+[node name="SpawnPoint_13" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.2833, 0, 73.5189)
+
+[node name="SpawnPoint_14" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.738, 0, 67.3245)
+
+[node name="SpawnPoint_15" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -71.224, 0, 69.6474)
+
+[node name="SpawnPoint_16" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -95.224, 0, 74.6474)
+
+[node name="SpawnPoint_17" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -83.2224, 0, 86.2619)
+
+[node name="SpawnPoint_18" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -104.128, 0, 88.972)
+
+[node name="SpawnPoint_19" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.4086, 0, 85.8748)
+
+[node name="SpawnPoint_20" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9868, 0, 87.0362)
+
+[node name="SpawnPoint_21" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.66066, 0, 87.0362)
+
+[node name="SpawnPoint_22" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5338, 0, 87.0362)
+
+[node name="SpawnPoint_23" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.1862, 0, 88.972)
+
+[node name="SpawnPoint_24" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90.5783, 0, 94.7792)
+
+[node name="SpawnPoint_25" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.3773, 0, 98.6507)
+
+[node name="SpawnPoint_26" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92096, 0, 98.6507)
+
+[node name="SpawnPoint_27" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -95.9984, 0, 107.555)
+
+[node name="SpawnPoint_28" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70.8336, 0, 103.297)
+
+[node name="SpawnPoint_29" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.28, 0, 103.297)
+
+[node name="SpawnPoint_30" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5024, 0, 106.007)
+
+[node name="SpawnPoint_31" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.9538, 0, 118.782)
+
+[node name="SpawnPoint_32" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.4085, 0, 128.074)
+
+[node name="SpawnPoint_33" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.30817, 0, 128.074)
+
+[node name="SpawnPoint_34" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.0544, 0, 128.074)
+
+[node name="SpawnPoint_35" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.9275, 0, 128.074)
+
+[node name="SpawnPoint_36" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -76.2537, 0, 128.074)
+
+[node name="SpawnPoint_37" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -102.967, 0, 128.074)
+
+[node name="SpawnPoint_38" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -99.8699, 0, 154.013)
+
+[node name="SpawnPoint_39" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.028, 0, 154.013)
+
+[node name="SpawnPoint_40" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.5058, 0, 157.885)
+
+[node name="SpawnPoint_41" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6622, 0, 157.885)
+
+[node name="SpawnPoint_42" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.7627, 0, 157.885)
+
+[node name="SpawnPoint_43" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.1482, 0, 168.338)
+
+[node name="SpawnPoint_44" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.40536, 0, 168.338)
+
+[node name="SpawnPoint_45" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.3115, 0, 175.693)
+
+[node name="SpawnPoint_46" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.9605, 0, 175.693)
+
+[node name="SpawnPoint_47" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.6739, 0, 182.275)
+
+[node name="SpawnPoint_48" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -102.967, 0, 186.921)
+
+[node name="SpawnPoint_49" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -102.967, 0, 202.02)
+
+[node name="SpawnPoint_50" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -71.6079, 0, 199.31)
+
+[node name="SpawnPoint_51" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -86.7068, 0, 210.537)
+
+[node name="SpawnPoint_52" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.0857, 0, 210.537)
+
+[node name="SpawnPoint_53" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01474, 0, 207.44)
+
+[node name="SpawnPoint_54" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.3409, 0, 203.568)
+
+[node name="SpawnPoint_55" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.3409, 0, 186.147)
+
+[node name="SpawnPoint_56" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.3076, 0, 186.147)
+
+[node name="SpawnPoint_57" type="Marker3D" parent="SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6547, 0, 193.738)
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
+occluder = ExtResource("7_o06y3")
+
+[editable path="BOXES/Floor"]
+[editable path="BOXES/Floor2"]
+[editable path="BOXES/Floor3"]
+[editable path="BOXES/Floor4"]
+[editable path="BOXES/Floor5"]
+[editable path="BOXES/Floor6"]
+[editable path="BOXES/Floor7"]
+[editable path="BOXES/Floor8"]
+[editable path="BOXES/Floor9"]
+[editable path="BOXES/Tree0"]
+[editable path="BOXES/blockbench_export11"]
+[editable path="BOXES/blockbench_export12"]
+[editable path="BOXES/blockbench_export13"]
+[editable path="BOXES/blockbench_export14"]
+[editable path="BOXES/blockbench_export15"]
+[editable path="BOXES/blockbench_export16"]
+[editable path="BOXES/blockbench_export17"]
+[editable path="BOXES/blockbench_export36"]
+[editable path="BOXES/blockbench_export37"]
+[editable path="BOXES/blockbench_export38"]
+[editable path="BOXES/blockbench_export39"]
+[editable path="BOXES/blockbench_export40"]
+[editable path="BOXES/blockbench_export41"]
+[editable path="BOXES/blockbench_export18"]
+[editable path="BOXES/blockbench_export19"]
+[editable path="BOXES/blockbench_export20"]
+[editable path="BOXES/blockbench_export21"]
+[editable path="BOXES/blockbench_export22"]
+[editable path="BOXES/blockbench_export23"]
+[editable path="BOXES/blockbench_export24"]
+[editable path="BOXES/blockbench_export25"]
+[editable path="BOXES/blockbench_export26"]
+[editable path="BOXES/blockbench_export27"]
+[editable path="BOXES/blockbench_export28"]
+[editable path="BOXES/blockbench_export29"]
+[editable path="BOXES/blockbench_export30"]
+[editable path="BOXES/blockbench_export31"]
+[editable path="BOXES/blockbench_export32"]
+[editable path="BOXES/blockbench_export74"]
+[editable path="BOXES/blockbench_export33"]
+[editable path="BOXES/blockbench_export34"]
+[editable path="BOXES/blockbench_export35"]
+[editable path="BOXES/blockbench_export42"]
+[editable path="BOXES/blockbench_export43"]
+[editable path="BOXES/blockbench_export44"]
+[editable path="BOXES/blockbench_export45"]
+[editable path="BOXES/blockbench_export46"]
+[editable path="BOXES/blockbench_export47"]
+[editable path="BOXES/blockbench_export48"]
+[editable path="BOXES/blockbench_export49"]
+[editable path="BOXES/blockbench_export50"]
+[editable path="BOXES/blockbench_export51"]
+[editable path="BOXES/blockbench_export52"]
+[editable path="BOXES/blockbench_export53"]
+[editable path="BOXES/blockbench_export54"]
+[editable path="BOXES/blockbench_export55"]
+[editable path="BOXES/blockbench_export56"]
+[editable path="BOXES/blockbench_export57"]
+[editable path="BOXES/blockbench_export58"]
+[editable path="BOXES/blockbench_export59"]
+[editable path="BOXES/blockbench_export60"]
+[editable path="BOXES/blockbench_export61"]
+[editable path="BOXES/blockbench_export62"]
+[editable path="BOXES/blockbench_export63"]
+[editable path="BOXES/blockbench_export64"]
+[editable path="BOXES/blockbench_export65"]
+[editable path="BOXES/blockbench_export66"]
+[editable path="BOXES/blockbench_export67"]
+[editable path="BOXES/blockbench_export68"]
+[editable path="BOXES/blockbench_export69"]
+[editable path="BOXES/blockbench_export70"]
+[editable path="BOXES/blockbench_export71"]
+[editable path="BOXES/blockbench_export72"]
+[editable path="BOXES/blockbench_export73"]
+[editable path="BOXES/blockbench_export75"]
+[editable path="BOXES/blockbench_export76"]
+[editable path="BOXES/blockbench_export77"]
+[editable path="BOXES/blockbench_export78"]
+[editable path="BOXES/blockbench_export79"]
+[editable path="BOXES/blockbench_export80"]
+[editable path="BOXES/blockbench_export81"]
