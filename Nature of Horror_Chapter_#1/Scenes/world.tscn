@@ -49,12 +49,9 @@ shader_parameter/anti_bleed_intensity = 1.8
 shader_parameter/color_bleed_blur_strength = 1.0
 shader_parameter/color_bleed_quality = 5
 
-[node name="World" type="Node3D" node_paths=PackedStringArray("player")]
+[node name="World" type="Node3D"]
 script = ExtResource("1_5ukr8")
 watcher_scene = ExtResource("5_fo5ed")
-player = NodePath("Player")
-min_spawn_distance = 30.0
-spawn_band_width = 50.0
 
 [node name="BOXES" type="Control" parent="."]
 visible = false
@@ -71,15 +68,15 @@ lod_bias = 0.001
 
 [node name="Leaf_Pile" parent="BOXES/Floor" index="1"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Fallen_leaves" parent="BOXES/Floor" index="2"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="AllInOne" parent="BOXES/Floor" index="3"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Floor2" parent="BOXES" instance=ExtResource("3_8j60k")]
 transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, 34.5401, 0, 128.537)
@@ -89,15 +86,15 @@ lod_bias = 0.001
 
 [node name="Leaf_Pile" parent="BOXES/Floor2" index="1"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Fallen_leaves" parent="BOXES/Floor2" index="2"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="AllInOne" parent="BOXES/Floor2" index="3"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Floor3" parent="BOXES" instance=ExtResource("3_8j60k")]
 transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, 36.1208, 0, 188.783)
@@ -107,15 +104,15 @@ lod_bias = 0.001
 
 [node name="Leaf_Pile" parent="BOXES/Floor3" index="1"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Fallen_leaves" parent="BOXES/Floor3" index="2"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="AllInOne" parent="BOXES/Floor3" index="3"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Floor4" parent="BOXES" instance=ExtResource("3_8j60k")]
 transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, -20.4343, 0, 184.249)
@@ -125,15 +122,15 @@ lod_bias = 0.001
 
 [node name="Leaf_Pile" parent="BOXES/Floor4" index="1"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Fallen_leaves" parent="BOXES/Floor4" index="2"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="AllInOne" parent="BOXES/Floor4" index="3"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Floor5" parent="BOXES" instance=ExtResource("3_8j60k")]
 transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, -77.8085, 0, 188.783)
@@ -143,15 +140,15 @@ lod_bias = 0.001
 
 [node name="Leaf_Pile" parent="BOXES/Floor5" index="1"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Fallen_leaves" parent="BOXES/Floor5" index="2"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="AllInOne" parent="BOXES/Floor5" index="3"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Floor6" parent="BOXES" instance=ExtResource("3_8j60k")]
 transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, -78.7193, 0, 127.48)
@@ -161,15 +158,15 @@ lod_bias = 0.001
 
 [node name="Leaf_Pile" parent="BOXES/Floor6" index="1"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Fallen_leaves" parent="BOXES/Floor6" index="2"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="AllInOne" parent="BOXES/Floor6" index="3"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Floor7" parent="BOXES" instance=ExtResource("3_8j60k")]
 transform = Transform3D(-0.0053581, 0, -0.999986, 0, 1, 0, 0.999986, 0, -0.0053581, -22.5482, 0, 124.078)
@@ -179,15 +176,15 @@ lod_bias = 0.001
 
 [node name="Leaf_Pile" parent="BOXES/Floor7" index="1"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Fallen_leaves" parent="BOXES/Floor7" index="2"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="AllInOne" parent="BOXES/Floor7" index="3"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Floor8" parent="BOXES" instance=ExtResource("3_8j60k")]
 transform = Transform3D(-0.0218846, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0218846, -18.6347, 0, 66.8814)
@@ -197,15 +194,15 @@ lod_bias = 0.001
 
 [node name="Leaf_Pile" parent="BOXES/Floor8" index="1"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Fallen_leaves" parent="BOXES/Floor8" index="2"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="AllInOne" parent="BOXES/Floor8" index="3"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Floor9" parent="BOXES" instance=ExtResource("3_8j60k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.3222, 0, 66.8814)
@@ -215,15 +212,15 @@ lod_bias = 0.001
 
 [node name="Leaf_Pile" parent="BOXES/Floor9" index="1"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Fallen_leaves" parent="BOXES/Floor9" index="2"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="AllInOne" parent="BOXES/Floor9" index="3"]
 lod_bias = 0.001
-visibility_range_end = 90.0
+visibility_range_end = 100.0
 
 [node name="Tree0" parent="BOXES" instance=ExtResource("2_8j60k")]
 transform = Transform3D(0.822938, 0, -0.568131, 0, 1, 0, 0.568131, 0, 0.822938, 0, 1.13267, 91.3934)
@@ -1019,6 +1016,7 @@ visibility_range_end = 100.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 83.1441, 0)
+visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aqk2v")

@@ -1,12 +1,15 @@
 extends Node3D
 
-@export var player: CharacterBody3D
 @export var stare_speed := 5.0
-@export var vanish_time := 30.0   # Seconds before auto vanish
+@export var vanish_time := 30.0
 
+var player: CharacterBody3D
 var player_inside := false
 var time_alive := 0.0
 
+func _ready():
+	# Automatically find player in scene
+	player = get_tree().get_first_node_in_group("player")
 
 func _process(delta):
 
